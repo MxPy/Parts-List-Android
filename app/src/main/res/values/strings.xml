@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">myToDo</string>
+    <string name="textview">my task\n</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Enter task details</string>
+    <string name="default_task_title">default</string>
+    <string name="no_desc_msg">no desc</string>
+</resources>

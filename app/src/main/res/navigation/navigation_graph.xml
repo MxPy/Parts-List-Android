@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_graph.xml"
+    app:startDestination="@id/taskListFragment">
+
+    <fragment
+        android:id="@+id/taskListFragment"
+        android:name="com.example.mytodo.TaskListFragment"
+        android:label="TaskListFragment"
+        tools:layout="@layout/fragment_task_list">
+        <action
+            android:id="@+id/action_taskListFragment_to_addTaskFragment"
+            app:destination="@id/addTaskFragment" />
+        <action
+            android:id="@+id/action_taskListFragment_to_displayTaskFragment"
+            app:destination="@id/displayTaskFragment" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/addTaskFragment"
+        android:name="com.example.mytodo.AddTaskFragment"
+        android:label="fragment_add_task"
+        tools:layout="@layout/fragment_add_task" >
+        <argument
+            android:name="taskToEdit"
+            app:argType="com.example.mytodo.Task"
+            app:nullable="true"
+            android:defaultValue="@null" />
+        <argument
+            android:name="edit"
+            app:argType="boolean"
+            android:defaultValue="false" />
+    </fragment>
+    <fragment
+        android:id="@+id/displayTaskFragment"
+        android:name="DisplayTaskFragment"
+        android:label="DisplayTaskFragment"
+        tools:layout="@layout/fragment_display_task"
+        >
+        <argument
+            android:name="task"
+            app:argType="com.example.mytodo.Task" />
+        <action
+            android:id="@+id/action_displayTaskFragment_to_addTaskFragment"
+            app:destination="@id/addTaskFragment" />
+    </fragment>
+</navigation>
