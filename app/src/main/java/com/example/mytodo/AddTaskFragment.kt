@@ -66,6 +66,7 @@ class AddTaskFragment : Fragment() {
     private fun saveTask() {
 // Get the values from data fields on the screen
         var title: String = binding.titleInput.text.toString()
+        val price = binding.editPrice.text.toString().toFloat()
         var description: String = binding.descriptionInput.text.toString()
         val importance = when(binding.importanceGroup.checkedRadioButtonId){
             R.id.low_radioButton -> IMPORTANCE.LOW
@@ -83,6 +84,7 @@ class AddTaskFragment : Fragment() {
             {title + description}.hashCode().toString(),
             title,
             description,
+            price,
             importance
         )
 

@@ -1,11 +1,11 @@
 package com.example.mytodo
 
+import android.R
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
+import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.example.mytodo.databinding.ActivityMainBinding
+
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding

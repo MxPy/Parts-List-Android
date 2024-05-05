@@ -5,4 +5,6 @@
     <string name="hello_blank_fragment">Enter task details</string>
     <string name="default_task_title">default</string>
     <string name="no_desc_msg">no desc</string>
+    <string name="budgetValue">Budget</string>
+    <string name="budgetvaluedisplay">budgetValueDisplay</string>
 </resources>

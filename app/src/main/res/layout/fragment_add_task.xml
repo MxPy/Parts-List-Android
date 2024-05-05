@@ -50,8 +50,8 @@
 
     <EditText
         android:id="@+id/descriptionInput"
-        android:layout_width="370dp"
-        android:layout_height="434dp"
+        android:layout_width="354dp"
+        android:layout_height="305dp"
         android:layout_marginTop="16dp"
         android:ems="10"
         android:inputType="text"
@@ -68,19 +68,19 @@
         android:text="Task importance"
         app:layout_constraintBottom_toTopOf="@+id/importanceGroup"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.059"
+        app:layout_constraintHorizontal_bias="0.094"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/descriptionInput" />
+        app:layout_constraintTop_toBottomOf="@+id/descriptionInput"
+        app:layout_constraintVertical_bias="0.133" />
 
     <RadioGroup
         android:id="@+id/importanceGroup"
-        android:layout_width="311dp"
-        android:layout_height="74dp"
-        android:layout_marginBottom="44dp"
+        android:layout_width="316dp"
+        android:layout_height="67dp"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="509dp">
 
         <RadioButton
             android:id="@+id/low_radioButton"
@@ -112,5 +112,20 @@
             app:layout_constraintStart_toEndOf="@+id/normal_radioButton"
             app:layout_constraintTop_toTopOf="parent" />
     </RadioGroup>
+
+    <EditText
+        android:id="@+id/editPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="95dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="106dp"
+        android:layout_marginBottom="78dp"
+        android:ems="10"
+        android:inputType="number"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/importanceGroup" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

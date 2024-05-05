@@ -1,14 +1,24 @@
 package com.example.mytodo
+
 import MyTaskRecyclerViewAdapter
+import Tasks
+import android.graphics.Color
+import android.graphics.PorterDuff
+import android.graphics.PorterDuffColorFilter
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.text.set
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mytodo.databinding.FragmentTaskListBinding
 import com.google.android.material.snackbar.Snackbar
+
 
 class TaskListFragment : Fragment(), ToDoListListener {
     // connect the fragment_task_list.xml with TaskListFragment class
@@ -29,15 +39,44 @@ class TaskListFragment : Fragment(), ToDoListListener {
                 this@TaskListFragment
             ) // adapter is responsible for displaying the data
         }
+
+        Log.i("chuj2", binding.BudgedCalcId.text.toString())
+        binding.BudgedCalcId.addTextChangedListener(tw)
+
         return binding.root
     }
 
+    var tw: TextWatcher = object : TextWatcher {
+        override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
+        override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+            Log.i("number", s.toString())
+            var num1 = binding.BudgedCalcId.text.toString().toFloat()
+            var num2 = binding.editBudget.text.toString().toFloat()
+            if (num1 < num2){
+                binding.BudgedCalcId.setTextColor(Color.RED);
+                binding.BudgedCalcId.background.colorFilter = PorterDuffColorFilter(Color.RED, PorterDuff.Mode.SRC_IN);
+            }else{
+                binding.BudgedCalcId.setTextColor(Color.GREEN);
+                binding.BudgedCalcId.background.colorFilter = PorterDuffColorFilter(Color.GREEN, PorterDuff.Mode.SRC_IN);
+            }
+        }
+        override fun afterTextChanged(s: Editable) {}
+    }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 // Set the action for the FAB
         binding.addButton.setOnClickListener {
 // Navigate to the AddTaskFragment with action id
             findNavController().navigate(R.id.action_taskListFragment_to_addTaskFragment)
+        }
+        binding.editBudget.setOnClickListener {
+            var num = 0.0
+            for (task in Tasks.list){
+                num -= task.price.toFloat()
+                Log.i("chuj", task.price.toFloat().toString())
+            }
+            binding.BudgedCalcId.setText((binding.editBudget.text.toString().toFloat()-num).toString())
+            Log.i("chuj3", binding.BudgedCalcId.text.toString())
         }
     }
 
