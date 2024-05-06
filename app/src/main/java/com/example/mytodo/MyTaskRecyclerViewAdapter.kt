@@ -43,6 +43,7 @@ class MyTaskRecyclerViewAdapter(
         val price: TextView = binding.price
         val checked: Switch = binding.checked
         val itemContainer: View = binding.root
+        var partType: TextView = binding.PartTypeStr
 
         override fun toString(): String {
             return super.toString() + " '" + contentView.text + "'"
@@ -61,7 +62,7 @@ class MyTaskRecyclerViewAdapter(
         holder.contentView.text = task.title
         holder.price.text = task.price
         holder.checked.isChecked = task.checked
-
+        holder.partType.text = task.category
         holder.checked.setOnClickListener{
             task.checked = holder.checked.isChecked
             eventListener.setOnBudget()

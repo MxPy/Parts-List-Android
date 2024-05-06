@@ -1,8 +1,12 @@
+import android.util.Log
 import com.example.mytodo.Task
+import kotlin.math.log
 
 object Tasks {
     // This is the list that will be used to store the tasks
     val list: MutableList<Task> = ArrayList()
+    val shownList: MutableList<Task> = ArrayList()
+    var catFilter: String = "Wszystkie"
     // This is the number of placeholder tasks that will be added to the list
     private val COUNT = 10
     // This is the init block that will be used to add the placeholder tasks to the list
@@ -14,6 +18,27 @@ object Tasks {
     // This function is used to add a task to the list
     fun addTask(task: Task) {
         list.add(task)
+        updateShownList()
+
+    }
+
+    fun updateFilter(filt: String){
+        catFilter = filt
+        updateShownList()
+    }
+    fun updateShownList(){
+        Log.i("chujujujuj", catFilter)
+        shownList.clear()
+        for (task in list){
+            if (catFilter == "Wszystkie"){
+                shownList.add(task)
+            }else{
+                if (task.category == catFilter){
+                    shownList.add(task)
+                }
+            }
+
+        }
     }
     // This function is used to create a placeholder task so the initial list is not empty
 //    private fun createPlaceholderTask(position: Int): Task {
@@ -41,5 +66,6 @@ object Tasks {
                 list[indexOfOld] = newTask
             }
         }
+        updateShownList()
     }
 }

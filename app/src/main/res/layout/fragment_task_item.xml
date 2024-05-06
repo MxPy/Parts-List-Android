@@ -7,8 +7,8 @@
 
     <TextView
         android:id="@+id/content"
-        android:layout_width="100dp"
-        android:layout_height="37dp"
+        android:layout_width="70dp"
+        android:layout_height="32dp"
         android:layout_marginStart="16dp"
         android:text="@string/textview"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -29,8 +29,8 @@
 
     <TextView
         android:id="@+id/price"
-        android:layout_width="101dp"
-        android:layout_height="34dp"
+        android:layout_width="43dp"
+        android:layout_height="36dp"
         android:layout_marginStart="8dp"
         android:text="0"
         app:layout_constraintStart_toEndOf="@+id/content"
@@ -40,9 +40,18 @@
         android:id="@+id/checked"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="4dp"
         android:showText="false"
-        app:layout_constraintStart_toEndOf="@+id/price"
+        app:layout_constraintStart_toEndOf="@+id/PartTypeStr"
         tools:checked="true"
         tools:layout_editor_absoluteY="5dp" />
+
+    <TextView
+        android:id="@+id/PartTypeStr"
+        android:layout_width="100dp"
+        android:layout_height="36dp"
+        android:layout_marginStart="4dp"
+        android:text="Inne"
+        app:layout_constraintStart_toEndOf="@+id/price"
+        tools:layout_editor_absoluteY="0dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

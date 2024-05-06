@@ -64,6 +64,7 @@ class AddTaskFragment : Fragment() {
         var price = binding.editPrice.text.toString()
         var description: String = binding.descriptionInput.text.toString()
         var checked = false;
+        var category: String = binding.PartType.selectedItem.toString()
 
 // Handle missing EditText input
         if(title.isEmpty())
@@ -79,7 +80,7 @@ class AddTaskFragment : Fragment() {
             description,
             price,
             checked,
-
+            category
         )
 
         if(!args.edit){

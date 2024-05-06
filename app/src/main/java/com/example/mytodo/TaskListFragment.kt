@@ -2,9 +2,8 @@ package com.example.mytodo
 
 import MyTaskRecyclerViewAdapter
 import Tasks
+import android.annotation.SuppressLint
 import android.graphics.Color
-import android.graphics.PorterDuff
-import android.graphics.PorterDuffColorFilter
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -12,11 +11,11 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.text.set
+import android.widget.AdapterView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.mytodo.databinding.FragmentDisplayTaskBinding
 import com.example.mytodo.databinding.FragmentTaskListBinding
 import com.google.android.material.snackbar.Snackbar
 
@@ -38,7 +37,7 @@ class TaskListFragment : Fragment(), ToDoListListener {
         with(binding.list) {
             layoutManager = LinearLayoutManager(context)
             adapter = MyTaskRecyclerViewAdapter(
-                Tasks.list,
+                Tasks.shownList,
                 this@TaskListFragment
             ) // adapter is responsible for displaying the data
 
@@ -75,6 +74,9 @@ class TaskListFragment : Fragment(), ToDoListListener {
     override fun onResume() {
         super.onResume()
         setOnBudget()
+        Tasks.updateShownList()
+        Log.i("cuj", "refresg")
+
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -88,11 +90,31 @@ class TaskListFragment : Fragment(), ToDoListListener {
             setOnBudget()
         }
 
+        binding.filter.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            @SuppressLint("DetachAndAttachSameFragment")
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                // Get the selected item from the spinner
+                val selectedItem = parent?.getItemAtPosition(position).toString()
+                // Update the filter
+                Tasks.updateFilter(selectedItem)
+
+            }
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                // Do nothing if nothing is selected
+            }
+        }
+
+
 
     }
     override fun setOnBudget(){
         var num = 0.0
-        for (task in Tasks.list){
+        for (task in Tasks.shownList){
             if(!task.checked){
                 num -= task.price.toFloat()
             }
