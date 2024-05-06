@@ -102,12 +102,20 @@ class TaskListFragment : Fragment(), ToDoListListener {
                 val selectedItem = parent?.getItemAtPosition(position).toString()
                 // Update the filter
                 Tasks.updateFilter(selectedItem)
-
+                with(binding.list) {
+                    layoutManager = LinearLayoutManager(context)
+                    adapter = MyTaskRecyclerViewAdapter(
+                        Tasks.shownList,
+                        this@TaskListFragment
+                    ) // adapter is responsible for displaying the data
+                }
+                setOnBudget()
             }
             override fun onNothingSelected(parent: AdapterView<*>?) {
                 // Do nothing if nothing is selected
             }
         }
+
 
 
 

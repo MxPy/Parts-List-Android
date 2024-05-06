@@ -37,8 +37,8 @@ object Tasks {
                     shownList.add(task)
                 }
             }
-
         }
+
     }
     // This function is used to create a placeholder task so the initial list is not empty
 //    private fun createPlaceholderTask(position: Int): Task {
