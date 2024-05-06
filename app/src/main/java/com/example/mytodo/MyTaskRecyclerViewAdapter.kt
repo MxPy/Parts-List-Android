@@ -1,19 +1,22 @@
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.ImageView
+import android.widget.Switch
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mytodo.IMPORTANCE
 import com.example.mytodo.R
 import com.example.mytodo.Task
+import com.example.mytodo.TaskListFragment
 import com.example.mytodo.ToDoListListener
 import com.example.mytodo.databinding.FragmentTaskItemBinding
 
 // Adapter is responsible for managing the display of the list –binding data with the views
 class MyTaskRecyclerViewAdapter(
     private val values: List<Task>,
-    private val eventListener: ToDoListListener
+    private val eventListener: ToDoListListener,
 ): RecyclerView.Adapter<MyTaskRecyclerViewAdapter.ViewHolder>()
 {
     // onCreateViewHolder creates the ViewHolder objects
@@ -37,7 +40,10 @@ class MyTaskRecyclerViewAdapter(
     {
         val imgView: ImageView = binding.itemImg
         val contentView: TextView = binding.content
+        val price: TextView = binding.price
+        val checked: Switch = binding.checked
         val itemContainer: View = binding.root
+
         override fun toString(): String {
             return super.toString() + " '" + contentView.text + "'"
         }
@@ -51,10 +57,15 @@ class MyTaskRecyclerViewAdapter(
             IMPORTANCE.NORMAL -> R.drawable.circle_drawable_orange
             IMPORTANCE.HIGH -> R.drawable.circle_drawable_red
         }
-
         holder.imgView.setImageResource(importanceImage)
         holder.contentView.text = task.title
+        holder.price.text = task.price
+        holder.checked.isChecked = task.checked
 
+        holder.checked.setOnClickListener{
+            task.checked = holder.checked.isChecked
+            eventListener.setOnBudget()
+        }
         holder.itemContainer.setOnClickListener{
             eventListener.onTaskClick(position)
         }

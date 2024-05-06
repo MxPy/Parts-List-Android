@@ -16,6 +16,7 @@ import androidx.core.text.set
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.mytodo.databinding.FragmentDisplayTaskBinding
 import com.example.mytodo.databinding.FragmentTaskListBinding
 import com.google.android.material.snackbar.Snackbar
 
@@ -23,12 +24,14 @@ import com.google.android.material.snackbar.Snackbar
 class TaskListFragment : Fragment(), ToDoListListener {
     // connect the fragment_task_list.xml with TaskListFragment class
     private lateinit var binding: FragmentTaskListBinding
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 // Inflate the layout for this fragment
         binding = FragmentTaskListBinding.inflate(inflater, container, false)
+
 // Set the adapter and layout manager for the RecyclerView
 // "with" is a Kotlin extension function that allows you to call
 // the methods of an object without explicitly calling the object itself
@@ -38,10 +41,14 @@ class TaskListFragment : Fragment(), ToDoListListener {
                 Tasks.list,
                 this@TaskListFragment
             ) // adapter is responsible for displaying the data
+
         }
 
-        Log.i("chuj2", binding.BudgedCalcId.text.toString())
+        Log.i("chuj2", binding.list.adapter.toString())
+
+
         binding.BudgedCalcId.addTextChangedListener(tw)
+
 
         return binding.root
     }
@@ -51,16 +58,23 @@ class TaskListFragment : Fragment(), ToDoListListener {
         override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
             Log.i("number", s.toString())
             var num1 = binding.BudgedCalcId.text.toString().toFloat()
-            var num2 = binding.editBudget.text.toString().toFloat()
+            var num2 = 0.0f
+            if (binding.editBudget.text.toString().isNotEmpty()){
+                var num2 = binding.editBudget.text.toString().toFloat()
+            }
+
             if (num1 < num2){
                 binding.BudgedCalcId.setTextColor(Color.RED);
-                binding.BudgedCalcId.background.colorFilter = PorterDuffColorFilter(Color.RED, PorterDuff.Mode.SRC_IN);
             }else{
                 binding.BudgedCalcId.setTextColor(Color.GREEN);
-                binding.BudgedCalcId.background.colorFilter = PorterDuffColorFilter(Color.GREEN, PorterDuff.Mode.SRC_IN);
             }
         }
         override fun afterTextChanged(s: Editable) {}
+    }
+
+    override fun onResume() {
+        super.onResume()
+        setOnBudget()
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -68,17 +82,31 @@ class TaskListFragment : Fragment(), ToDoListListener {
         binding.addButton.setOnClickListener {
 // Navigate to the AddTaskFragment with action id
             findNavController().navigate(R.id.action_taskListFragment_to_addTaskFragment)
+
         }
         binding.editBudget.setOnClickListener {
-            var num = 0.0
-            for (task in Tasks.list){
-                num -= task.price.toFloat()
-                Log.i("chuj", task.price.toFloat().toString())
-            }
-            binding.BudgedCalcId.setText((binding.editBudget.text.toString().toFloat()-num).toString())
-            Log.i("chuj3", binding.BudgedCalcId.text.toString())
+            setOnBudget()
         }
+
+
     }
+    override fun setOnBudget(){
+        var num = 0.0
+        for (task in Tasks.list){
+            if(!task.checked){
+                num -= task.price.toFloat()
+            }
+            Log.i("chuj", task.checked.toString())
+        }
+        if (binding.editBudget.text.toString().isEmpty()){
+            binding.BudgedCalcId.setText((0.0f+num).toString())
+        }else{
+            binding.BudgedCalcId.setText((binding.editBudget.text.toString().toFloat()+num).toString())
+        }
+        Log.i("chuj3", binding.BudgedCalcId.text.toString())
+    }
+
+
 
     override fun onTaskClick(taskPosition: Int) {
 // create an action to navigate to the DisplayTaskFragment

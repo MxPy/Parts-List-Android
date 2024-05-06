@@ -37,12 +37,7 @@ class AddTaskFragment : Fragment() {
         binding.titleInput.setText(args.taskToEdit?.title)
         binding.descriptionInput.setText(args.taskToEdit?.description)
 // Set the importance radio button with the task to edit (only if it's not null)
-        when(args.taskToEdit?.importance){
-            IMPORTANCE.LOW -> binding.lowRadioButton.isChecked = true
-            IMPORTANCE.NORMAL -> binding.normalRadioButton.isChecked = true
-            IMPORTANCE.HIGH -> binding.highRadioButton.isChecked = true
-            else -> binding.normalRadioButton.isChecked = true
-        }
+
         return binding.root
     }
 
@@ -66,26 +61,25 @@ class AddTaskFragment : Fragment() {
     private fun saveTask() {
 // Get the values from data fields on the screen
         var title: String = binding.titleInput.text.toString()
-        val price = binding.editPrice.text.toString().toFloat()
+        var price = binding.editPrice.text.toString()
         var description: String = binding.descriptionInput.text.toString()
-        val importance = when(binding.importanceGroup.checkedRadioButtonId){
-            R.id.low_radioButton -> IMPORTANCE.LOW
-            R.id.normal_radioButton -> IMPORTANCE.NORMAL
-            R.id.high_radioButton -> IMPORTANCE.HIGH
-            else -> IMPORTANCE.NORMAL
-        }
+        var checked = false;
+
 // Handle missing EditText input
         if(title.isEmpty())
             title = getString(R.string.default_task_title) + "${Tasks.list.size + 1}"
         if(description.isEmpty())
             description = getString(R.string.no_desc_msg)
+        if(price.isEmpty())
+            price = "0";
 // Create a new Task item based on input values
         val taskItem = Task(
             {title + description}.hashCode().toString(),
             title,
             description,
             price,
-            importance
+            checked,
+
         )
 
         if(!args.edit){

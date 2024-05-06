@@ -13,7 +13,8 @@ data class Task(
     val id: String,
     val title: String,
     val description: String,
-    val price: Number,
+    val price: String,
+    var checked: Boolean,
     val importance: IMPORTANCE = IMPORTANCE.NORMAL
 ) : Parcelable// Parcelable is an interface that allows you to pass data between activities
 // and fragments
