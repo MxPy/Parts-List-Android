@@ -5,7 +5,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.example.mytodo.IMPORTANCE
 import com.example.mytodo.R
 import com.example.mytodo.databinding.FragmentDisplayTaskBinding
 
@@ -27,13 +26,10 @@ class DisplayTaskFragment : Fragment() {
         val task = args.task
         binding.displayTitle.text = task.title
         binding.displayDescription.text = task.description
+        binding.price.text = task.price
+        binding.PartTypeStr.text = task.category
 // select the drawable resource for the image view based on the importance of the task
-        val importanceDrawable = when(task.importance){
-            IMPORTANCE.LOW -> R.drawable.circle_drawable_green
-            IMPORTANCE.NORMAL -> R.drawable.circle_drawable_orange
-            IMPORTANCE.HIGH -> R.drawable.circle_drawable_red
-        }
-        binding.displayImportance.setImageResource(importanceDrawable)
+
 
         binding.displayEdit.setOnClickListener {
 // create an action to navigate to the AddTaskFragment with the displayed task

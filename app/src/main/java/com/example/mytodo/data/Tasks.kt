@@ -6,7 +6,7 @@ object Tasks {
     // This is the list that will be used to store the tasks
     val list: MutableList<Task> = ArrayList()
     val shownList: MutableList<Task> = ArrayList()
-    var catFilter: String = "Wszystkie"
+    var catFilter: String = "All"
     // This is the number of placeholder tasks that will be added to the list
     private val COUNT = 10
     // This is the init block that will be used to add the placeholder tasks to the list
@@ -30,7 +30,7 @@ object Tasks {
         Log.i("chujujujuj", catFilter)
         shownList.clear()
         for (task in list){
-            if (catFilter == "Wszystkie"){
+            if (catFilter == "All"){
                 shownList.add(task)
             }else{
                 if (task.category == catFilter){

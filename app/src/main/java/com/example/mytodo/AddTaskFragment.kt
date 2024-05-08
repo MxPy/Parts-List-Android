@@ -36,6 +36,7 @@ class AddTaskFragment : Fragment() {
 // (only if it's not null)
         binding.titleInput.setText(args.taskToEdit?.title)
         binding.descriptionInput.setText(args.taskToEdit?.description)
+        binding.editPrice.setText(args.taskToEdit?.price)
 // Set the importance radio button with the task to edit (only if it's not null)
 
         return binding.root

@@ -7,13 +7,36 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="DisplayTaskFragment">
+
+    <TextView
+        android:id="@+id/price"
+        android:layout_width="43dp"
+        android:layout_height="36dp"
+        android:layout_marginStart="76dp"
+        android:layout_marginTop="37dp"
+        android:text="0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/displayTitle" />
+
+    <TextView
+        android:id="@+id/PartTypeStr"
+        android:layout_width="100dp"
+        android:layout_height="36dp"
+        android:layout_marginStart="84dp"
+        android:layout_marginTop="37dp"
+        android:layout_marginEnd="108dp"
+        android:text="Other"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/price"
+        app:layout_constraintTop_toBottomOf="@+id/displayTitle" />
+
     <ImageView
         android:id="@+id/displayImportance"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="44dp"
+        android:layout_height="47dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:src="@drawable/circle_drawable_red"
+        android:src="@android:drawable/ic_menu_manage"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
     <TextView
@@ -35,13 +58,15 @@
         android:src="@android:drawable/ic_menu_edit"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/displayImportance" />
+
     <TextView
         android:id="@+id/displayDescription"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="84dp"
         android:text="TextView"
         app:layout_constraintEnd_toEndOf="@+id/displayEdit"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/displayImportance"
         app:layout_constraintTop_toBottomOf="@+id/displayImportance" />
 </androidx.constraintlayout.widget.ConstraintLayout>

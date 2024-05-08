@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="categories" >
-        <item>Silnik</item>
-        <item>Zawieszenie</item>
+        <item>Engine</item>
+        <item>Suspension</item>
         <item>Karoseria</item>
-        <item>Układ wydechowy</item>
-        <item>Wnętrze</item>
-        <item>Inne</item>
+        <item>Exhaust</item>
+        <item>Interior</item>
+        <item>Other</item>
     </string-array>
     <string-array name="categories_filter" >
-        <item>Wszystkie</item>
-        <item>Silnik</item>
-        <item>Zawieszenie</item>
+        <item>All</item>
+        <item>Engine</item>
+        <item>Suspension</item>
         <item>Karoseria</item>
-        <item>Układ wydechowy</item>
-        <item>Wnętrze</item>
-        <item>Inne</item>
+        <item>Exhaust</item>
+        <item>Interior</item>
+        <item>Other</item>
     </string-array>
 </resources>

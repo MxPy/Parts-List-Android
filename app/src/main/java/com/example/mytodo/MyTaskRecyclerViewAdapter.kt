@@ -6,7 +6,6 @@ import android.widget.ImageView
 import android.widget.Switch
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.mytodo.IMPORTANCE
 import com.example.mytodo.R
 import com.example.mytodo.Task
 import com.example.mytodo.TaskListFragment
@@ -38,7 +37,6 @@ class MyTaskRecyclerViewAdapter(
     // The ViewHolder class is a container for the views in the recycler view item
     class ViewHolder(binding: FragmentTaskItemBinding) : RecyclerView.ViewHolder(binding.root)
     {
-        val imgView: ImageView = binding.itemImg
         val contentView: TextView = binding.content
         val price: TextView = binding.price
         val checked: Switch = binding.checked
@@ -53,12 +51,7 @@ class MyTaskRecyclerViewAdapter(
     override fun onBindViewHolder(holder: MyTaskRecyclerViewAdapter.ViewHolder, position: Int) {
         val task = values[position]
 
-        val importanceImage = when(task.importance){
-            IMPORTANCE.LOW -> R.drawable.circle_drawable_green
-            IMPORTANCE.NORMAL -> R.drawable.circle_drawable_orange
-            IMPORTANCE.HIGH -> R.drawable.circle_drawable_red
-        }
-        holder.imgView.setImageResource(importanceImage)
+
         holder.contentView.text = task.title
         holder.price.text = task.price
         holder.checked.isChecked = task.checked
